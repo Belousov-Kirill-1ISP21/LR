@@ -26,7 +26,7 @@ class Person:
         print("Имя человека:" + self.__name)
 
     def DisplayAge(self):
-        print("Возраст человека:" + self.__age)
+        print("Возраст человека:" + str(self.__age))
 
     def DisplayAll(self):
         print(self.__name)
@@ -53,9 +53,9 @@ class Customer(Person):
         print("Время посещения клиентом зала:" + self.__visitTime)
 
     def DisplayAll(self):
-        print("Имя клиента:" + self.__name)
-        print("Возраст клиента:" + self.__age)
-        print("Время посещения клиентом зала:" +self.__visitTime)
+        print("Имя клиента:" + self.getName())
+        print("Возраст клиента:" + str(self.getAge()))
+        print("Время посещения клиентом зала:" + str(self.__visitTime))
 
 class Employee(Person):
 
@@ -77,9 +77,9 @@ class Employee(Person):
         print("Стаж сотрудника:" + self.__expirienceAge)
 
     def DisplayAll(self):
-        print("Имя сотрудника:" + self.__name)
-        print("Возраст сотрудника:" + self.__age)
-        print("Стаж сотрудника:" + self.__expirienceAge)
+        print("Имя сотрудника:" + self.getName())
+        print("Возраст сотрудника:" + str(self.getAge()))
+        print("Стаж сотрудника:" + str(self.__expirienceAge))
 
 class Trainer(Employee):
 
@@ -102,9 +102,9 @@ class Trainer(Employee):
         print("Специализация тренера:" + self.__specialisation)
 
     def DisplayAll(self):
-        print("Имя тренера:" + self.__name)
-        print("Возраст тренера:" + self.__age)
-        print("Стаж тренера:" + self.__expirienceAge)
+        print("Имя тренера:" + self.getName())
+        print("Возраст тренера:" + str(self.getAge()))
+        print("Стаж тренера:" + str(self.getExpirienceAge()))
         print("Специализация тренера:" + self.__specialisation)
 
 class Training:
@@ -180,3 +180,5 @@ for i in range(len(trainingList)):
 
 for i in range(len(clientList)):
     print("Для клиента " + clientList[i].getName() + " тренером является " + clientsTrainerList.get(clientList[i]).getName() + ".")
+
+
