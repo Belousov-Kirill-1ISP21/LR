@@ -24,3 +24,17 @@ class Customer(Person):
         print("Имя клиента:" + self.getName())
         print("Возраст клиента:" + str(self.getAge()))
         print("Время посещения клиентом зала:" + str(self.__visitTime))
+
+#UserInput
+    @staticmethod
+    def createCustomer():
+        customerName = str(input("Введите имя клиента:")).replace (' ', '')
+        customerAge = None
+        while (type(customerAge)!=int):
+            try:
+                customerAge = int(input("Введите возраст клиента:"))
+            except:
+                print("Возраст введён неверно. Введите только число полных лет.")
+
+        customer = Customer(customerName,customerAge,0)
+        return customer

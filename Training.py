@@ -1,3 +1,7 @@
+from ClientTrainerList import ClientTrainerList
+from Customer import Customer
+
+
 class Training:
 
 # Constructor
@@ -52,3 +56,42 @@ class Training:
         print("Клиент тренировки:" + self.__customer.getName())
         print("Продолжителньость тренировки:" + str(self.__duration))
         print("Время начала тренировки:" + str(self.__time))
+
+#UserInput
+    @staticmethod
+    def createTraining():
+        customer = Customer.createCustomer()
+        trainerForClient = None
+        duration = None
+        time = None
+
+        iter = False
+        while (iter == False):
+            print("Выберите тренера:")
+            ClientTrainerList.DisplayTrainers()
+            trainerForClientName = str(input()).replace(' ', '').replace(' ', '')
+            trainerForClient = ClientTrainerList.getTrainerByName(trainerForClientName)
+            if (trainerForClient!=None):
+                iter = True
+
+
+        iter = False
+        while (iter == False):
+            try:
+                time = str(input("Введите время тренировки (часы:минуты):"))
+                hoursAndMins = time.split(':')
+                if (type(int(hoursAndMins[0])) == int and type(int(hoursAndMins[1])) == int):
+                    iter = True
+                else:
+                    raise Exception
+            except Exception:
+                print("Время введено неверно. Формат времени: 14:13")
+
+        while (type(duration)!=int):
+            try:
+                duration = int(input("Введите продолжительность тренировки в минутах:"))
+            except:
+                print("Число минут введено неверно. Введите только число.")
+
+        training = Training(time, trainerForClient, customer, duration)
+        return training
