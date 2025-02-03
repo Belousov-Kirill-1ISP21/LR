@@ -22,5 +22,22 @@ ClientTrainerList.addPair(client1, trainer2)
 ClientTrainerList.changePair(client2, trainer1)
 ClientTrainerList.DisplayPairs()
 
+client4 = Customer("Sergey", 35, 12)
+trainer4 = Trainer("Andrey", 40, 15, "Power trainings")
+training4 = Training("14:10", trainer4, client4, 90)
+
+client5 = Customer("Sasha", 30, 10)
+trainer5 = Trainer("Vanya", 44, 18, "Speed trainings")
+training5 = Training("15:20", trainer5, client5, 120)
+
+print(client4 == client5)
+print(client5 == client2)
+
+print(trainer4 == trainer5)
+print(trainer5 == trainer2)
+
+print(training4 == training5)
+print(training5 == training2)
+
 training3 = Training.createTraining()
 training3.DisplayAll()

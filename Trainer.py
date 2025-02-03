@@ -16,7 +16,7 @@ class Trainer(Employee):
         self.__specialisation = specialisation
 
 
-# DisplayInfo
+#DisplayInfo
     def DisplaySpecialisation(self):
         print("Специализация тренера:" + self.__specialisation)
 
@@ -25,3 +25,12 @@ class Trainer(Employee):
         print("Возраст тренера:" + str(self.getAge()))
         print("Стаж тренера:" + str(self.getExpirienceAge()))
         print("Специализация тренера:" + self.__specialisation)
+
+#Operator Overloading
+    def __eq__(self, other):
+        return ((self.getName()==other.getName() and self.getAge()==other.getAge()
+                and self.getExpirienceAge() == other.getExpirienceAge())
+                and self.getSpecialisation() == other.getSpecialisation())
+
+    def __hash__(self):
+        return hash((self.getName(), self.getAge(), self.getExpirienceAge(), self.getSpecialisation()))

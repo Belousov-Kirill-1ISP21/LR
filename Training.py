@@ -1,7 +1,6 @@
 from ClientTrainerList import ClientTrainerList
 from Customer import Customer
 
-
 class Training:
 
 # Constructor
@@ -70,9 +69,11 @@ class Training:
             print("Выберите тренера:")
             ClientTrainerList.DisplayTrainers()
             trainerForClientName = str(input()).replace(' ', '').replace(' ', '')
-            trainerForClient = ClientTrainerList.getTrainerByName(trainerForClientName)
-            if (trainerForClient!=None):
+            if (ClientTrainerList.isTrainerNameInTheList(trainerForClientName)==True):
+                trainerForClient = ClientTrainerList.getTrainerByName(trainerForClientName)
                 iter = True
+            else:
+                print("Тренера с таким именем нет в списке.")
 
 
         iter = False
@@ -95,3 +96,12 @@ class Training:
 
         training = Training(time, trainerForClient, customer, duration)
         return training
+
+#Operator Overloading
+    def __eq__(self, other):
+        return ((self.getTrainer()==other.getTrainer() and self.getCustomer()==other.getCustomer()
+                and self.getTime() == other.getTime())
+                and self.getDuration() == other.getDuration())
+
+    def __hash__(self):
+        return hash((self.getTrainer(), self.getCustomer(), self.getTime(), self.getDuration()))

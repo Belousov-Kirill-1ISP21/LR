@@ -38,3 +38,12 @@ class Customer(Person):
 
         customer = Customer(customerName,customerAge,0)
         return customer
+
+    #Operator Overloading
+    def __eq__(self, other):
+        return (self.getName()==other.getName() and self.getAge()==other.getAge()
+                and self.getVisitTime() == other.getVisitTime())
+
+
+    def __hash__(self):
+        return hash((self.getName(), self.getAge(), self.getVisitTime()))

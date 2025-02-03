@@ -11,8 +11,6 @@ class ClientTrainerList:
         for i in ClientTrainerList.__List:
             if (ClientTrainerList.__List[i].getName() == trainerName):
                 return ClientTrainerList.__List[i]
-
-        print("Тренера с таким именем нет в списке.")
         return None
 
 #ChangeList
@@ -27,6 +25,14 @@ class ClientTrainerList:
     @staticmethod
     def changePair(client, trainer):
         ClientTrainerList.__List[client]=trainer
+
+#GetInfo
+    @staticmethod
+    def isTrainerNameInTheList(trainerName):
+        for i in ClientTrainerList.__List:
+            if (ClientTrainerList.__List[i].getName() == trainerName):
+                return True
+        return False
 
 #DisplayInfo
     @staticmethod
