@@ -17,6 +17,12 @@ class Customer(Person):
 
 #DisplayInfo
 
+    def DisplayName(self):
+        print("Имя клиента:" + self.getName())
+
+    def DisplayAge(self):
+        print("Возраст клиента:" + str(self.getAge()))
+
     def DisplayVisitTime(self):
         print("Время посещения клиентом зала:" + self.__visitTime)
 
@@ -35,6 +41,8 @@ class Customer(Person):
                 customerAge = int(input("Введите возраст клиента:"))
             except:
                 print("Возраст введён неверно. Введите только число полных лет.")
+            finally:
+                print(".....................................")
 
         customer = Customer(customerName,customerAge,0)
         return customer
@@ -47,3 +55,6 @@ class Customer(Person):
 
     def __hash__(self):
         return hash((self.getName(), self.getAge(), self.getVisitTime()))
+
+    def __repr__(self):
+        return (str(self.getName())+","+str(self.getAge())+","+str(self.getVisitTime()))

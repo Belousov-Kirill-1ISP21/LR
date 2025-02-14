@@ -1,3 +1,4 @@
+from WrongStrInputValue import WrongStrInputValue
 from ClientTrainerList import ClientTrainerList
 from Customer import Customer
 
@@ -76,6 +77,7 @@ class Training:
                 print("Тренера с таким именем нет в списке.")
 
 
+
         iter = False
         while (iter == False):
             try:
@@ -84,15 +86,20 @@ class Training:
                 if (type(int(hoursAndMins[0])) == int and type(int(hoursAndMins[1])) == int):
                     iter = True
                 else:
-                    raise Exception
-            except Exception:
+                    raise WrongStrInputValue
+            except:
                 print("Время введено неверно. Формат времени: 14:13")
+            finally:
+                print(".....................................")
 
         while (type(duration)!=int):
             try:
                 duration = int(input("Введите продолжительность тренировки в минутах:"))
             except:
                 print("Число минут введено неверно. Введите только число.")
+            finally:
+                print(".....................................")
+
 
         training = Training(time, trainerForClient, customer, duration)
         return training

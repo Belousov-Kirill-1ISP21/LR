@@ -16,6 +16,12 @@ class Employee(Person):
         self.__expirienceAge = expirienceAge
 
 #DisplayInfo
+    def DisplayName(self):
+        print("Имя сотрудника:" + self.getName())
+
+    def DisplayAge(self):
+        print("Возраст сотрудника:" + str(self.getAge()))
+
     def DisplayExpirienceAge(self):
         print("Стаж сотрудника:" + self.__expirienceAge)
 
@@ -23,3 +29,4 @@ class Employee(Person):
         print("Имя сотрудника:" + self.getName())
         print("Возраст сотрудника:" + str(self.getAge()))
         print("Стаж сотрудника:" + str(self.__expirienceAge))
+

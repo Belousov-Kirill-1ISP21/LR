@@ -1,4 +1,4 @@
-from Employee import Employee
+from OP.Employee import Employee
 
 class Trainer(Employee):
 
@@ -17,6 +17,13 @@ class Trainer(Employee):
 
 
 #DisplayInfo
+    def DisplayName(self):
+        print("Имя тренера:" + self.getName())
+
+
+    def DisplayAge(self):
+        print("Возраст тренера:" + str(self.getAge()))
+
     def DisplaySpecialisation(self):
         print("Специализация тренера:" + self.__specialisation)
 
@@ -25,6 +32,19 @@ class Trainer(Employee):
         print("Возраст тренера:" + str(self.getAge()))
         print("Стаж тренера:" + str(self.getExpirienceAge()))
         print("Специализация тренера:" + self.__specialisation)
+
+    def DisplayInfo(self):
+        iter=0
+        while (iter==0):
+            answer = str(input("Нужно ли указывать специализацию?")).replace (' ', '')
+            if (answer=="Да"):
+                self.DisplayAll()
+                iter=1
+            elif (answer=="Нет"):
+                super().DisplayAll()
+                iter=1
+            else:
+                print("Вы ввели что-то не то!")
 
 #Operator Overloading
     def __eq__(self, other):
