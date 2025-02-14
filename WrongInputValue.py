@@ -1,7 +1,7 @@
-from OP.MyException import MyCustomError
+from OP.MyException import MyException
 
 
-class WrongInputValue(MyCustomError):
+class WrongInputValue(MyException):
     def __init__(self):
         super().__init__()
         print('Create WrongInputValue')

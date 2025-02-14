@@ -1,4 +1,4 @@
-class MyCustomError(Exception):
+class MyException(Exception):
     def __init__(self):
         print('Create MyCustomerror')
     def __str__(self):
