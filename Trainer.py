@@ -1,4 +1,4 @@
-from OP.Employee import Employee
+from Employee import Employee
 
 class Trainer(Employee):
 

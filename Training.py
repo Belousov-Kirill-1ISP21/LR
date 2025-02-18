@@ -1,6 +1,7 @@
 from WrongStrInputValue import WrongStrInputValue
 from ClientTrainerList import ClientTrainerList
 from Customer import Customer
+from WrongIntInputValue import WrongIntInputValue
 
 class Training:
 
@@ -80,23 +81,20 @@ class Training:
 
         iter = False
         while (iter == False):
+            time = str(input("Введите время тренировки (часы:минуты):"))
+            hoursAndMins = time.split(':')
             try:
-                time = str(input("Введите время тренировки (часы:минуты):"))
-                hoursAndMins = time.split(':')
                 if (type(int(hoursAndMins[0])) == int and type(int(hoursAndMins[1])) == int):
                     iter = True
-                else:
-                    raise WrongStrInputValue
             except:
-                print("Время введено неверно. Формат времени: 14:13")
-            finally:
-                print(".....................................")
+                raise WrongStrInputValue("Время введено неверно. Формат времени: 14:13")
+
 
         while (type(duration)!=int):
             try:
                 duration = int(input("Введите продолжительность тренировки в минутах:"))
             except:
-                print("Число минут введено неверно. Введите только число.")
+                raise WrongIntInputValue("Число минут введено неверно. Введите только число.")
             finally:
                 print(".....................................")
 

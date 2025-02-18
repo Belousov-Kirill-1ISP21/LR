@@ -1,4 +1,4 @@
-from OP.MyException import MyException
+from MyException import MyException
 
 
 class WrongInputValue(MyException):

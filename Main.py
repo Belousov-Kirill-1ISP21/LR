@@ -2,6 +2,8 @@ from Customer import Customer
 from Trainer import Trainer
 from Training import Training
 from ClientTrainerList import ClientTrainerList
+from WrongStrInputValue import WrongStrInputValue
+from WrongIntInputValue import WrongIntInputValue
 
 def findMaxAge(mas):
     maxage = 0
@@ -35,6 +37,18 @@ ClientTrainerList.addPair(client2, trainer2)
 
 # print(trainer1.__specialisation) Выдаёт ошибку, так как атрибут защищённый
 trainer1.DisplayInfo()
-training3 = Training.createTraining()
-training3.DisplayAll()
+iter=0
+while (iter==0):
+    try:
+        training3 = Training.createTraining()
+        training3.DisplayAll()
+        iter=1
+    except WrongStrInputValue:
+        print("Введено неверное строкове значение.")
+    except WrongIntInputValue:
+        print("Введено неверное числовое значение.")
+
+
+
+
 
