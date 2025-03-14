@@ -1,4 +1,5 @@
 from Person import Person
+import logging
 
 class Employee(Person):
 
