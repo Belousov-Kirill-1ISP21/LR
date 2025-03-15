@@ -14,8 +14,12 @@ class GUI:
             Trainer.createTrainer()
         elif (button_name == "Создать тренировку"):
             Training.createTraining()
-        elif (button_name == "Добавить пару клиент-тренер"):
-            ClientTrainerList.addPair()
+        elif (button_name == "Изменить информацию о клиенте"):
+            Customer.changeInfo()
+        elif (button_name == "Изменить информацию о тренере"):
+            Trainer.changeInfo()
+        elif (button_name == "Изменить информацию о тренировке"):
+            Training.changeInfo()
         elif (button_name == "Изменить пару клиент-тренер"):
             ClientTrainerList.changePair()
         elif (button_name == "Посмотреть клиентов"):
@@ -40,7 +44,7 @@ class GUI:
         # Создание основного окна
         root = tk.Tk()
         root.title("Простой интерфейс с кнопками")
-        root.geometry("666x666")
+        root.geometry("777x777")
 
         # Создание кнопок
         button1 = tk.Button(root, text="Создать клиента", command=lambda: GUI.onButtonClick("Создать клиента"))
@@ -52,36 +56,40 @@ class GUI:
         button3 = tk.Button(root, text="Создать тренировку", command=lambda: GUI.onButtonClick("Создать тренировку"))
         button3.pack(pady=10)
 
-        button4 = tk.Button(root, text="Добавить пару клиент-тренер", command=lambda: GUI.onButtonClick("Добавить пару клиент-тренер"))
+        button4 = tk.Button(root, text="Изменить информацию о клиенте", command=lambda: GUI.onButtonClick("Изменить информацию о клиенте"))
         button4.pack(pady=10)
 
-        button5 = tk.Button(root, text="Изменить пару клиент-тренер", command=lambda: GUI.onButtonClick("Изменить пару клиент-тренер"))
+        button5 = tk.Button(root, text="Изменить информацию о тренере", command=lambda: GUI.onButtonClick("Изменить информацию о тренере"))
         button5.pack(pady=10)
 
-        button6 = tk.Button(root, text="Посмотреть клиентов", command=lambda: GUI.onButtonClick("Посмотреть клиентов"))
+        button6 = tk.Button(root, text="Изменить информацию о тренировке", command=lambda: GUI.onButtonClick("Изменить информацию о тренировке"))
         button6.pack(pady=10)
 
-        button7 = tk.Button(root, text="Посмотреть тренеров", command=lambda: GUI.onButtonClick("Посмотреть тренеров"))
+        button7 = tk.Button(root, text="Изменить пару клиент-тренер", command=lambda: GUI.onButtonClick("Изменить пару клиент-тренер"))
         button7.pack(pady=10)
 
-        button8 = tk.Button(root, text="Посмотреть тренировки", command=lambda: GUI.onButtonClick("Посмотреть тренировки"))
+        button8 = tk.Button(root, text="Посмотреть клиентов", command=lambda: GUI.onButtonClick("Посмотреть клиентов"))
         button8.pack(pady=10)
 
-        button9 = tk.Button(root, text="Посмотреть пары клиент-тренер", command=lambda: GUI.onButtonClick("Посмотреть пары клиент-тренер"))
+        button9 = tk.Button(root, text="Посмотреть тренеров", command=lambda: GUI.onButtonClick("Посмотреть тренеров"))
         button9.pack(pady=10)
 
-        button10 = tk.Button(root, text="Удалить клиента", command=lambda: GUI.onButtonClick("Удалить клиента"))
+        button10 = tk.Button(root, text="Посмотреть тренировки", command=lambda: GUI.onButtonClick("Посмотреть тренировки"))
         button10.pack(pady=10)
 
-        button11 = tk.Button(root, text="Удалить тренера", command=lambda: GUI.onButtonClick("Удалить тренера"))
-        button11.pack(pady=10)  # Отображение кнопки с отступом по вертикали
+        button11 = tk.Button(root, text="Посмотреть пары клиент-тренер", command=lambda: GUI.onButtonClick("Посмотреть пары клиент-тренер"))
+        button11.pack(pady=10)
 
-        button12 = tk.Button(root, text="Удалить тренировку", command=lambda: GUI.onButtonClick("Удалить тренировку"))
+        button12 = tk.Button(root, text="Удалить клиента", command=lambda: GUI.onButtonClick("Удалить клиента"))
         button12.pack(pady=10)
 
-        button13 = tk.Button(root, text="Удалить пару клиент-тренер",command=lambda: GUI.onButtonClick("Удалить пару клиент-тренер"))
+        button13 = tk.Button(root, text="Удалить тренера", command=lambda: GUI.onButtonClick("Удалить тренера"))
         button13.pack(pady=10)  # Отображение кнопки с отступом по вертикали
 
-        # Запуск основного цикла приложения
+        button14 = tk.Button(root, text="Удалить тренировку", command=lambda: GUI.onButtonClick("Удалить тренировку"))
+        button14.pack(pady=10)
+
+        button15 = tk.Button(root, text="Удалить пару клиент-тренер",command=lambda: GUI.onButtonClick("Удалить пару клиент-тренер"))
+        button15.pack(pady=10)  # Отображение кнопки с отступом по вертикали
 
         root.mainloop()

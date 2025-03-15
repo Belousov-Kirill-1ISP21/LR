@@ -28,6 +28,7 @@ class ClientTrainerList:
 
 
 #ChangeList
+
     @staticmethod
     def addPair():
         clientName = str(simpledialog.askstring("Добавление пары клиент-тренер", "Введите имя клиента:")).replace(' ', '')
@@ -48,6 +49,7 @@ class ClientTrainerList:
             except ValueError:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректные имена.")
 
+
     @staticmethod
     def addPairDirectly(client,trainer):
         ClientTrainerList.__List.update({client: trainer})
@@ -59,7 +61,7 @@ class ClientTrainerList:
         if clientName is not None:
             try:
                 client = ClientTrainerList.getCustomerByName(clientName)
-                if Customer.isCustomerNameInTheList(clientName):
+                if ClientTrainerList.isCustomerNameInTheList(clientName):
                     trainerName = ClientTrainerList.getList()[client].getName()
                     ClientTrainerList.__List.pop(client)
                     logging.info('Из списка была удалена пара клиент-тренер.')
@@ -75,7 +77,7 @@ class ClientTrainerList:
         trainerName = str(simpledialog.askstring("Изменение пары клиент-тренер", "Введите имя тренера:")).replace(' ','')
         if clientName is not None and trainerName is not None:
             try:
-                if Customer.isCustomerNameInTheList(clientName):
+                if ClientTrainerList.isCustomerNameInTheList(clientName):
                     if Trainer.isTrainerNameInTheList(trainerName):
                         client = Customer.getCustomerByName(clientName)
                         trainer = Trainer.getTrainerByName(trainerName)
@@ -85,7 +87,7 @@ class ClientTrainerList:
                     else:
                         messagebox.showerror("Ошибка", "Нет тренера с таким именем.")
                 else:
-                    messagebox.showerror("Ошибка", "Нет клиента с таким именем.")
+                    messagebox.showerror("Ошибка", "Нет пары с клиентом с таким именем.")
             except ValueError:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректные имена.")
 
@@ -94,6 +96,13 @@ class ClientTrainerList:
     def isTrainerNameInTheList(trainerName):
         for i in ClientTrainerList.__List:
             if (ClientTrainerList.__List[i].getName() == trainerName):
+                return True
+        return False
+
+    @staticmethod
+    def isCustomerNameInTheList(customerName):
+        for i in ClientTrainerList.__List:
+            if (i.getName() == customerName):
                 return True
         return False
 

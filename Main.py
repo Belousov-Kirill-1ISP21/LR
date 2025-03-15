@@ -7,7 +7,7 @@ from ClientTrainerList import ClientTrainerList
 
 
 loggingConfig.setupLogging()
-'''
+''
 client1 = Customer("Ivan", 35, 12)
 trainer1 = Trainer("Wasili", 40, 15, "Power trainings")
 ClientTrainerList.addPairDirectly(client1, trainer1)
@@ -17,7 +17,7 @@ client2 = Customer("Sasha", 30, 10)
 trainer2 = Trainer("Vanya", 44, 18, "Speed trainings")
 ClientTrainerList.addPairDirectly(client2, trainer2)
 training2 = Training(1,"15:20", trainer2, client2, 120)
-'''
+''
 GUI.start()
 
 
