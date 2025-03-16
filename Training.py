@@ -34,6 +34,17 @@ class Training:
     def getDuration(self):
         return self.__duration
 
+    @staticmethod
+    def getList():
+        return Training.__List
+
+    @staticmethod
+    def getTrainingById(ID):
+        for i in Training.__List:
+            if (i.getId() == ID):
+                return i
+        return None
+
 #Setters
     def setId(self, id):
         self.__Id = id
@@ -50,9 +61,6 @@ class Training:
     def setTime(self, time):
         self.__time = time
 
-    @staticmethod
-    def getList():
-        return Training.__List
 
 #DisplayInfo
 
@@ -78,7 +86,18 @@ class Training:
         print("Продолжителньость тренировки:" + str(self.__duration))
         print("Время начала тренировки:" + str(self.__time))
 
-#UserInput
+    @staticmethod
+    def displayTrainings():
+        result = ""
+        for i in range(len(Training.__List)):
+            result += ("Тренировка " + str(Training.__List[i].__id) + ":\n" +
+                       "Тренер тренировки:" + Training.__List[i].__trainer.getName() + "\n" +
+                       "Клиент тренировки:" + Training.__List[i].__customer.getName() + "\n" +
+                       "Продолжителньость тренировки:" + str(Training.__List[i].__duration) + "\n" +
+                       "Время начала тренировки:" + str(Training.__List[i].__time)) + "\n"
+        messagebox.showinfo("Тренировки", result)
+
+#ChangeList
     @staticmethod
     def createTraining():
         if len(Training.__List)!=0:
@@ -103,8 +122,6 @@ class Training:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректные данные.")
 
 
-
-
     @staticmethod
     def addTraining(training):
         Training.__List.append(training)
@@ -123,16 +140,6 @@ class Training:
                     messagebox.showerror("Ошибка", "Тренировки по этому индексу нет.")
             except ValueError:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
-    @staticmethod
-    def displayTrainings():
-        result = ""
-        for i in range(len(Training.__List)):
-            result += ("Тренировка " + str(Training.__List[i].__id) + ":\n" +
-                       "Тренер тренировки:" + Training.__List[i].__trainer.getName() + "\n" +
-                       "Клиент тренировки:" + Training.__List[i].__customer.getName() + "\n" +
-                       "Продолжителньость тренировки:" + str(Training.__List[i].__duration) + "\n" +
-                       "Время начала тренировки:" + str(Training.__List[i].__time)) +"\n"
-        messagebox.showinfo("Тренировки", result)
 
     @staticmethod
     def changeInfo():
@@ -165,13 +172,7 @@ class Training:
         except:
             messagebox.showerror("Ошибка", "Пожалуйста, введите корректное ID тренировки.")
 
-    @staticmethod
-    def getTrainingById(ID):
-        for i in Training.__List:
-            if (i.getId() == ID):
-                return i
-        return None
-
+#GetInfo
     @staticmethod
     def isTrainingIdInTheList(ID):
         for i in Training.__List:

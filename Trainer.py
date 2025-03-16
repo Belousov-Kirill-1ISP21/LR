@@ -20,6 +20,13 @@ class Trainer(Employee):
     def getList():
         return Trainer.__List
 
+    @staticmethod
+    def getTrainerByName(clientName):
+        for i in Trainer.__List:
+            if (i.getName() == clientName):
+                return i
+        return None
+
 #Setters
     def setSpecialisation(self, specialisation):
         self.__specialisation = specialisation
@@ -55,6 +62,15 @@ class Trainer(Employee):
             else:
                 print("Вы ввели что-то не то!")
 
+    @staticmethod
+    def displayTrainers():
+        result = ""
+        for i in Trainer.__List:
+            result += str(i.getName()) + "\n" + "Возраст:" + str(i.getAge()) + "\n" + "Опыт работы:" + str(
+                i.getExpirienceAge()) + "\n" + "Специализация:" + str(i.getSpecialisation()) + "\n"
+        messagebox.showinfo("Тренера", result)
+
+#ChangeList
     @staticmethod
     def createTrainer():
         trainerName = str(simpledialog.askstring("Создание тренера", "Введите имя тренера:")).replace(' ', '')
@@ -111,20 +127,8 @@ class Trainer(Employee):
                     messagebox.showerror("Ошибка", "Тренера по этому индексу нет.")
             except ValueError:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
-    @staticmethod
-    def displayTrainers():
-        result = ""
-        for i in Trainer.__List:
-            result += str(i.getName()) + "\n" + "Возраст:" + str(i.getAge()) + "\n" + "Опыт работы:" + str(i.getExpirienceAge()) + "\n" + "Специализация:" + str(i.getSpecialisation()) + "\n"
-        messagebox.showinfo("Тренера", result)
 
-    @staticmethod
-    def getTrainerByName(clientName):
-        for i in Trainer.__List:
-            if (i.getName() == clientName):
-                return i
-        return None
-
+#GetInfo
     @staticmethod
     def isTrainerNameInTheList(trainerName):
         for i in Trainer.__List:

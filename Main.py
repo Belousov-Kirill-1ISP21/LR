@@ -5,7 +5,6 @@ from Trainer import Trainer
 from Training import Training
 from ClientTrainerList import ClientTrainerList
 
-
 loggingConfig.setupLogging()
 ''
 client1 = Customer("Ivan", 35, 12)

@@ -21,6 +21,13 @@ class Customer(Person):
     def getList():
         return Customer.__List
 
+    @staticmethod
+    def getCustomerByName(clientName):
+        for i in Customer.__List:
+            if (i.getName() == clientName):
+                return i
+        return None
+
 #Setters
     def setVisitTime(self, visitTime):
         self.__visitTime = visitTime
@@ -46,9 +53,10 @@ class Customer(Person):
     def displayCustomers():
         result = ""
         for i in Customer.__List:
-            result+= str(i.getName()) + "\n" + "Возраст:" + str(i.getAge()) + "\n"
+            result+= str(i.getName()) + "\n" + "Возраст:" + str(i.getAge()) + "\n" + "Время посещения:" + str(i.getVisitTime()) + "\n"
         messagebox.showinfo("Пользователи", result)
 
+#ChangeList
     @staticmethod
     def addCustomer(client):
         Customer.__List.append(client)
@@ -70,22 +78,6 @@ class Customer(Person):
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
 
     @staticmethod
-    def getCustomerByName(clientName):
-        for i in Customer.__List:
-            if (i.getName() == clientName):
-                return i
-        return None
-
-    @staticmethod
-    def isCustomerNameInTheList(customerName):
-        for i in Customer.__List:
-            if (i.getName() == customerName):
-                return True
-        return False
-
-
-#UserInput
-    @staticmethod
     def createCustomer():
         customerName = str(simpledialog.askstring("Создание клиента", "Введите имя клиента:")).replace(' ','')
         customerAge = simpledialog.askinteger("Создание клиента", "Введите возраст клиента:")
@@ -104,9 +96,14 @@ class Customer(Person):
                 if Customer.isCustomerNameInTheList(clientName):
                     customerAge = simpledialog.askinteger("Изменение информации о клиенте", "Введите возраст клиента:")
                     if customerAge is not None:
-                        client.setAge(customerAge)
-                        logging.info('Информация о клиенте была изменена.')
-                        messagebox.showinfo("Операция проведена успешно", "Инфомрация о клиенте " + clientName + " была успешно изменена.")
+                        customerVisitTime = simpledialog.askinteger("Создание клиента", "Введите время посещения в часах:")
+                        if customerVisitTime is not None:
+                            client.setAge(customerAge)
+                            client.setVisitTime(customerVisitTime)
+                            logging.info('Информация о клиенте была изменена.')
+                            messagebox.showinfo("Операция проведена успешно", "Инфомрация о клиенте " + clientName + " была успешно изменена.")
+                        else:
+                            messagebox.showerror("Ошибка", "Пожалуйста, введите корректное время посещения клиента в часах")
                     else:
                         messagebox.showerror("Ошибка", "Пожалуйста, введите корректный возраст клиента")
                 else:
@@ -114,7 +111,13 @@ class Customer(Person):
         except:
             messagebox.showerror("Ошибка", "Пожалуйста, введите корректное имя клиента.")
 
-
+#GetInfo
+    @staticmethod
+    def isCustomerNameInTheList(customerName):
+        for i in Customer.__List:
+            if (i.getName() == customerName):
+                return True
+        return False
 
     def createCopy(self):
         clientMas = lambda client: client.__repr__().split(',')

@@ -48,7 +48,7 @@ class GUI:
 
         # Создание кнопок
         button1 = tk.Button(root, text="Создать клиента", command=lambda: GUI.onButtonClick("Создать клиента"))
-        button1.pack(pady=10)  # Отображение кнопки с отступом по вертикали
+        button1.pack(pady=10)
 
         button2 = tk.Button(root, text="Создать тренера", command=lambda: GUI.onButtonClick("Создать тренера"))
         button2.pack(pady=10)
@@ -84,12 +84,12 @@ class GUI:
         button12.pack(pady=10)
 
         button13 = tk.Button(root, text="Удалить тренера", command=lambda: GUI.onButtonClick("Удалить тренера"))
-        button13.pack(pady=10)  # Отображение кнопки с отступом по вертикали
+        button13.pack(pady=10)
 
         button14 = tk.Button(root, text="Удалить тренировку", command=lambda: GUI.onButtonClick("Удалить тренировку"))
         button14.pack(pady=10)
 
         button15 = tk.Button(root, text="Удалить пару клиент-тренер",command=lambda: GUI.onButtonClick("Удалить пару клиент-тренер"))
-        button15.pack(pady=10)  # Отображение кнопки с отступом по вертикали
+        button15.pack(pady=10)
 
         root.mainloop()
