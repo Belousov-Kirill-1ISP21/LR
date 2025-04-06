@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QFrame, QScrollArea, QCheckBox, \
-    QGridLayout
+    QGridLayout, QLineEdit
 from PyQt5.QtCore import Qt
 
 
@@ -143,12 +143,16 @@ class GUI(QWidget):
 
         bottomButtonLayout = QHBoxLayout()
         firstBotButton = QPushButton("Добавить клиента")
-        secondBotButton = QPushButton("Удалить клиента")
+        secondBotButton = QPushButton("Внести изменения")
+        thirdBotButton = QPushButton("Удалить клиента")
         firstBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         secondBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
+        thirdBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         bottomButtonLayout.addWidget(firstBotButton)
-        bottomButtonLayout.addSpacing(444)
+        bottomButtonLayout.addSpacing(111)
         bottomButtonLayout.addWidget(secondBotButton)
+        bottomButtonLayout.addSpacing(111)
+        bottomButtonLayout.addWidget(thirdBotButton)
 
         clientLayout.addLayout(bottomButtonLayout)
 
@@ -206,12 +210,16 @@ class GUI(QWidget):
 
         bottomButtonLayout = QHBoxLayout()
         firstBotButton = QPushButton("Добавить тренера")
-        secondBotButton = QPushButton("Удалить тренера")
+        secondBotButton = QPushButton("Внести изменения")
+        thirdBotButton = QPushButton("Удалить тренера")
         firstBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         secondBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
+        thirdBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         bottomButtonLayout.addWidget(firstBotButton)
-        bottomButtonLayout.addSpacing(444)
+        bottomButtonLayout.addSpacing(111)
         bottomButtonLayout.addWidget(secondBotButton)
+        bottomButtonLayout.addSpacing(111)
+        bottomButtonLayout.addWidget(thirdBotButton)
 
         trainerLayout.addLayout(bottomButtonLayout)
 
@@ -272,12 +280,16 @@ class GUI(QWidget):
 
         bottomButtonLayout = QHBoxLayout()
         firstBotButton = QPushButton("Добавить тренировку")
-        secondBotButton = QPushButton("Удалить тренировку")
+        secondBotButton = QPushButton("Внести изменения")
+        thirdBotButton = QPushButton("Удалить тренировку")
         firstBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         secondBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
+        thirdBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         bottomButtonLayout.addWidget(firstBotButton)
-        bottomButtonLayout.addSpacing(444)
+        bottomButtonLayout.addSpacing(111)
         bottomButtonLayout.addWidget(secondBotButton)
+        bottomButtonLayout.addSpacing(111)
+        bottomButtonLayout.addWidget(thirdBotButton)
 
         trainingLayout.addLayout(bottomButtonLayout)
 
@@ -360,14 +372,18 @@ class GUI(QWidget):
         firstBotButton = QPushButton("Посмотреть связи клиента")
         secondBotButton = QPushButton("Посмотреть связи тренировки")
         thirdBotButton = QPushButton("Посмотреть связи тренера")
+        fourthBotButton = QPushButton("Внести изменения")
         firstBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         secondBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         thirdBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
+        fourthBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         bottomButtonLayout.addWidget(firstBotButton)
-        bottomButtonLayout.addSpacing(111)
+        bottomButtonLayout.addSpacing(55.5)
         bottomButtonLayout.addWidget(secondBotButton)
-        bottomButtonLayout.addSpacing(111)
+        bottomButtonLayout.addSpacing(55.5)
         bottomButtonLayout.addWidget(thirdBotButton)
+        bottomButtonLayout.addSpacing(55.5)
+        bottomButtonLayout.addWidget(fourthBotButton)
 
         relationsLayout.addLayout(bottomButtonLayout)
 
@@ -456,23 +472,18 @@ class GUI(QWidget):
                 height: 20px;
             }
         """)
-        id_label = QLabel("id: 0")
-        name_label = QLabel("Имя: Александр Владимирович")
-        age_label = QLabel("Возраст: 30 лет")
-        visit_label = QLabel("Время посещения: 2 месяца")
+        id_edit, id_input = self.create_labeled_input("id: ", "0")
+        name_edit, name_input = self.create_labeled_input("Имя:", "Александр Владимирович")
+        age_edit, age_input = self.create_labeled_input("Возраст:", "30 лет")
+        visit_edit, visit_input = self.create_labeled_input("Время посещения:", "2 месяца")
 
-        # Устанавливаем выравнивание текста в метках
-        for label in [id_label, name_label, age_label, visit_label]:
-            label.setAlignment(Qt.AlignLeft)
-            label.setStyleSheet("font-size: 14px; margin: 5px;")
-            label.setAlignment(Qt.AlignVCenter)
 
         # Добавляем метки в layout
         layout.addWidget(checkBox)
-        layout.addWidget(id_label)
-        layout.addWidget(name_label)
-        layout.addWidget(age_label)
-        layout.addWidget(visit_label)
+        layout.addWidget(id_edit)
+        layout.addWidget(name_edit)
+        layout.addWidget(age_edit)
+        layout.addWidget(visit_edit)
 
         # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
@@ -514,24 +525,19 @@ class GUI(QWidget):
                 height: 20px;
             }
         """)
-        id_label = QLabel("id: 0")
-        name_label = QLabel("Имя: Александр Владимирович")
-        age_label = QLabel("Возраст: 30 лет")
-        specialization_label = QLabel("Специализация: силовые тренировки")
-        experience_label = QLabel("Опыт работы: 1 год")
-
-        # Устанавливаем выравнивание текста в метках
-        for label in [id_label, name_label, age_label, specialization_label, experience_label]:
-            label.setAlignment(Qt.AlignLeft)
-            label.setStyleSheet("font-size: 14px; margin: 5px;")
+        id_edit, id_input = self.create_labeled_input("id: ", "0")
+        name_edit, name_input = self.create_labeled_input("Имя:", "Александр Владимирович")
+        age_edit, age_input = self.create_labeled_input("Возраст:", "30 лет")
+        specialization_edit, specialization_input = self.create_labeled_input("Специализация:", "силовые тренировки")
+        experience_edit, experience_input = self.create_labeled_input("Опыт работы:", "1 год")
 
         # Добавляем метки в layout
         layout.addWidget(checkBox)
-        layout.addWidget(id_label)
-        layout.addWidget(name_label)
-        layout.addWidget(age_label)
-        layout.addWidget(specialization_label)
-        layout.addWidget(experience_label)
+        layout.addWidget(id_edit)
+        layout.addWidget(name_edit)
+        layout.addWidget(age_edit)
+        layout.addWidget(specialization_edit)
+        layout.addWidget(experience_edit)
 
         # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
@@ -573,24 +579,19 @@ class GUI(QWidget):
                 height: 20px;
             }
         """)
-        id_label = QLabel("id: 0")
-        client_label = QLabel("Клиент: Александр Владимирович")
-        trainer_label = QLabel("Тренер: Александр Владимирович")
-        time_label = QLabel("Время начала: 14:14")
-        duration_label = QLabel("Продолжительность: 90 минут")
-
-        # Устанавливаем выравнивание текста в метках
-        for label in [id_label, client_label, trainer_label, time_label, duration_label]:
-            label.setAlignment(Qt.AlignLeft)
-            label.setStyleSheet("font-size: 14px; margin: 5px;")
+        id_edit, id_input = self.create_labeled_input("id: ", "0")
+        client_edit, client_input = self.create_labeled_input("Клиент:", "Александр Владимирович")
+        trainer_edit, trainer_input = self.create_labeled_input("Тренер:", "Александр Владимирович")
+        time_edit, time_input = self.create_labeled_input("Время начала:", "14:14")
+        duration_edit, duration_input = self.create_labeled_input("Продолжительность:", "90 минут")
 
         # Добавляем метки в layout
         layout.addWidget(checkBox)
-        layout.addWidget(id_label)
-        layout.addWidget(client_label)
-        layout.addWidget(trainer_label)
-        layout.addWidget(time_label)
-        layout.addWidget(duration_label)
+        layout.addWidget(id_edit)
+        layout.addWidget(client_edit)
+        layout.addWidget(trainer_edit)
+        layout.addWidget(time_edit)
+        layout.addWidget(duration_edit)
 
         # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
@@ -620,3 +621,24 @@ class GUI(QWidget):
         elif column_number == 3:
             self.column3.insertWidget(self.column3.count() - 1, card)  # Добавляем перед stretch
 
+    def create_labeled_input(self, label_text, default_value):
+        """Создает поле ввода с нестираемой меткой сбоку"""
+        container = QWidget()
+        container.setFixedSize(313, 56)
+        container.setStyleSheet("margin: 5px;")
+        layout = QHBoxLayout(container)
+
+        # Фиксированная метка
+        label = QLabel(label_text)
+        label.setStyleSheet("font-size: 14px; margin: 5px; margin-right: 0px; border: none;")
+        label.setAlignment(Qt.AlignLeft)
+        label.setAlignment(Qt.AlignVCenter)
+
+        # Поле для ввода
+        line_edit = QLineEdit(default_value)
+        line_edit.setStyleSheet("height: 28px;")
+
+        layout.addWidget(label)
+        layout.addWidget(line_edit)
+
+        return container, line_edit
