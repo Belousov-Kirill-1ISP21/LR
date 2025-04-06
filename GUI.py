@@ -357,9 +357,9 @@ class GUI(QWidget):
         relationsLayout.addSpacing(44)
 
         bottomButtonLayout = QHBoxLayout()
-        firstBotButton = QPushButton("Удалить клиента")
-        secondBotButton = QPushButton("Удалить тренировку")
-        thirdBotButton = QPushButton("Удалить тренера")
+        firstBotButton = QPushButton("Посмотреть связи клиента")
+        secondBotButton = QPushButton("Посмотреть связи тренировки")
+        thirdBotButton = QPushButton("Посмотреть связи тренера")
         firstBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         secondBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
         thirdBotButton.setStyleSheet("font-size: 16px; padding: 10px 20px;")
@@ -619,3 +619,4 @@ class GUI(QWidget):
             self.column2.addWidget(card)
         elif column_number == 3:
             self.column3.insertWidget(self.column3.count() - 1, card)  # Добавляем перед stretch
+
