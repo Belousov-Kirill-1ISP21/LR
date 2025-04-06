@@ -1,3 +1,5 @@
+import sys
+from PyQt5.QtWidgets import QApplication
 from Customer import Customer
 from GUI import GUI
 from loggingConfig import loggingConfig
@@ -17,7 +19,13 @@ trainer2 = Trainer("Vanya", 44, 18, "Speed trainings")
 ClientTrainerList.addPairDirectly(client2, trainer2)
 training2 = Training(1,"15:20", trainer2, client2, 120)
 ''
-GUI.start()
+
+# Запуск приложения
+app = QApplication(sys.argv)
+window = GUI()
+window.resize(800, 600)  # Установка размера окна
+window.show()
+sys.exit(app.exec_())
 
 
 
