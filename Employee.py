@@ -4,17 +4,17 @@ import logging
 class Employee(Person):
 
 # Constructor
-    def __init__(self, name, age, expirienceAge):
+    def __init__(self, name, age, expirience):
         super().__init__(name, age)
-        self.__expirienceAge = expirienceAge
+        self.__expirience = expirience
 
 #Getters
-    def getExpirienceAge(self):
-        return self.__expirienceAge
+    def getExpirience(self):
+        return self.__expirience
 
 #Setters
-    def setExpirienceAge(self, expirienceAge):
-        self.__expirienceAge = expirienceAge
+    def setExpirience(self, expirience):
+        self.__expirience = expirience
 
 #DisplayInfo
     def DisplayName(self):
@@ -23,11 +23,11 @@ class Employee(Person):
     def DisplayAge(self):
         print("Возраст сотрудника:" + str(self.getAge()))
 
-    def DisplayExpirienceAge(self):
-        print("Стаж сотрудника:" + self.__expirienceAge)
+    def DisplayExpirience(self):
+        print("Стаж сотрудника:" + self.__expirience)
 
     def DisplayAll(self):
         print("Имя сотрудника:" + self.getName())
         print("Возраст сотрудника:" + str(self.getAge()))
-        print("Стаж сотрудника:" + str(self.__expirienceAge))
+        print("Стаж сотрудника:" + str(self.__expirience))
 

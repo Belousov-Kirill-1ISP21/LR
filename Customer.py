@@ -6,13 +6,16 @@ class Customer(Person):
     __List = []
 
 # Constructor
-    def __init__(self, name, age, visitTime):
+    def __init__(self, id, name, age, visitTime):
+        self.__id = id
         super().__init__(name, age)
         self.__visitTime = visitTime
         Customer.addCustomer(self)
         logging.info('Был создан клиент ' + name + '.')
 
 #Getters
+    def getId(self):
+        return self.__id
 
     def getVisitTime(self):
         return self.__visitTime
@@ -28,11 +31,23 @@ class Customer(Person):
                 return i
         return None
 
+    @staticmethod
+    def getCustomerById(ID):
+        for i in Customer.__List:
+            if (i.getId() == ID):
+                return i
+        return None
+
 #Setters
+    def setId(self, id):
+        self.__Id = id
+
     def setVisitTime(self, visitTime):
         self.__visitTime = visitTime
 
 #DisplayInfo
+    def DisplayId(self):
+        print("Id клиента:" + self.__id)
 
     def DisplayName(self):
         print("Имя клиента:" + self.getName())
@@ -44,6 +59,7 @@ class Customer(Person):
         print("Время посещения клиентом зала:" + self.__visitTime)
 
     def DisplayAll(self):
+        print("Id клиента:" + self.__id)
         print("Имя клиента:" + self.getName())
         print("Возраст клиента:" + str(self.getAge()))
         print("Время посещения клиентом зала:" + str(self.__visitTime))
@@ -62,20 +78,8 @@ class Customer(Person):
         Customer.__List.append(client)
 
     @staticmethod
-    def deleteCustomer():
-        user_input = simpledialog.askinteger("Удаление клиента", "Введите индекс:")
-        if user_input is not None:
-            try:
-                index = user_input
-                if not index<0 and not index>len(Customer.getList()):
-                    name = Customer.getList()[index].getName()
-                    Customer.getList().pop(index)
-                    logging.info('Из списка был удалён клиент.')
-                    messagebox.showinfo("Операция проведена успешно", "Клиент " + name + " был успешно удалён.")
-                else:
-                    messagebox.showerror("Ошибка", "Клиента по этому индексу нет.")
-            except ValueError:
-                messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
+    def deleteCustomerByID(id):
+        Customer.getList().pop(id)
 
     @staticmethod
     def createCustomer():
@@ -119,6 +123,13 @@ class Customer(Person):
                 return True
         return False
 
+    @staticmethod
+    def isCustomererIdInTheList(ID):
+        for i in Customer.__List:
+            if (i.getId() == ID):
+                return True
+        return False
+
     def createCopy(self):
         clientMas = lambda client: client.__repr__().split(',')
         customerCopyByMas = lambda clientMas: Customer(clientMas[0], int(clientMas[1]), int(clientMas[2]))
@@ -127,8 +138,7 @@ class Customer(Person):
 
     #Operator Overloading
     def __eq__(self, other):
-        return (self.getName()==other.getName() and self.getAge()==other.getAge()
-                and self.getVisitTime() == other.getVisitTime())
+        return self.getId()==other.getId()
 
 
     def __hash__(self):

@@ -6,13 +6,17 @@ class Trainer(Employee):
     __List = []
 
 # Constructor
-    def __init__(self, name, age, expirienceAge, specialisation):
-        super().__init__(name, age, expirienceAge)
+    def __init__(self, id, name, age, expirience, specialisation):
+        self.__id = id
+        super().__init__(name, age, expirience)
         self.__specialisation = specialisation
         Trainer.addTrainer(self)
         logging.info('Был создан тренер ' + name + '.')
 
 #Getters
+    def getId(self):
+        return self.__id
+
     def getSpecialisation(self):
         return self.__specialisation
 
@@ -27,12 +31,25 @@ class Trainer(Employee):
                 return i
         return None
 
+    @staticmethod
+    def getTrainerById(ID):
+        for i in Trainer.__List:
+            if (i.getId() == ID):
+                return i
+        return None
+
 #Setters
+    def setId(self, id):
+        self.__Id = id
+
     def setSpecialisation(self, specialisation):
         self.__specialisation = specialisation
 
 
 #DisplayInfo
+    def DisplayId(self):
+        print("Id тренера:" + self.__id)
+
     def DisplayName(self):
         print("Имя тренера:" + self.getName())
 
@@ -44,30 +61,18 @@ class Trainer(Employee):
         print("Специализация тренера:" + self.__specialisation)
 
     def DisplayAll(self):
+        print("Id тренера:" + self.__id)
         print("Имя тренера:" + self.getName())
         print("Возраст тренера:" + str(self.getAge()))
-        print("Стаж тренера:" + str(self.getExpirienceAge()))
+        print("Стаж тренера:" + str(self.getExpirience()))
         print("Специализация тренера:" + self.__specialisation)
-
-    def DisplayInfo(self):
-        iter=0
-        while (iter==0):
-            answer = str(input("Нужно ли указывать специализацию?")).replace (' ', '')
-            if (answer=="Да"):
-                self.DisplayAll()
-                iter=1
-            elif (answer=="Нет"):
-                super().DisplayAll()
-                iter=1
-            else:
-                print("Вы ввели что-то не то!")
 
     @staticmethod
     def displayTrainers():
         result = ""
         for i in Trainer.__List:
             result += str(i.getName()) + "\n" + "Возраст:" + str(i.getAge()) + "\n" + "Опыт работы:" + str(
-                i.getExpirienceAge()) + "\n" + "Специализация:" + str(i.getSpecialisation()) + "\n"
+                i.getExpirience()) + "\n" + "Специализация:" + str(i.getSpecialisation()) + "\n"
         messagebox.showinfo("Тренера", result)
 
 #ChangeList
@@ -75,11 +80,11 @@ class Trainer(Employee):
     def createTrainer():
         trainerName = str(simpledialog.askstring("Создание тренера", "Введите имя тренера:")).replace(' ', '')
         trainerAge = simpledialog.askinteger("Создание тренера", "Введите возраст тренера:")
-        expirienceAge = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
+        expirience = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
         specialisation = str(simpledialog.askstring("Создание тренера", "Введите специализацию тренера:")).replace(' ', '')
-        if trainerName is not None and trainerAge is not None and expirienceAge is not None and specialisation is not None:
+        if trainerName is not None and trainerAge is not None and expirience is not None and specialisation is not None:
             try:
-                Trainer(trainerName, trainerAge, expirienceAge,specialisation)
+                Trainer(trainerName, trainerAge, expirience,specialisation)
                 messagebox.showinfo("Операция проведена успешно", "Тренер " + trainerName + " был успешно создан.")
             except ValueError:
                 messagebox.showerror("Ошибка", "Пожалуйста, введите корректные данные.")
@@ -97,11 +102,11 @@ class Trainer(Employee):
                 trainer = Trainer.getTrainerByName(trainerName)
                 if Trainer.isTrainerNameInTheList(trainerName):
                     trainerAge = simpledialog.askinteger("Изменение информации о тренере","Введите возраст тренера:")
-                    expirienceAge = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
+                    expirience = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
                     specialisation = str(simpledialog.askstring("Создание тренера", "Введите специализацию тренера:")).replace(' ', '')
-                    if trainerAge is not None and expirienceAge is not None and specialisation is not None:
+                    if trainerAge is not None and expirience is not None and specialisation is not None:
                         trainer.setAge(trainerAge)
-                        trainer.setExpirienceAge(expirienceAge)
+                        trainer.setExpirienceAge(expirience)
                         trainer.setSpecialisation(specialisation)
                         logging.info('Информация о тренере была изменена.')
                         messagebox.showinfo("Операция проведена успешно","Инфомрация о тренере " + trainerName + " была успешно изменена.")
@@ -113,20 +118,8 @@ class Trainer(Employee):
             messagebox.showerror("Ошибка", "Пожалуйста, введите корректное имя тренера.")
 
     @staticmethod
-    def deleteTrainer():
-        user_input = simpledialog.askinteger("Удаление тренера", "Введите индекс:")
-        if user_input is not None:
-            try:
-                index = user_input
-                if not index < 0 and not index > len(Trainer.getList()):
-                    name = Trainer.getList()[index].getName()
-                    Trainer.__List.pop(index)
-                    logging.info('Из списка был удалён тренер.')
-                    messagebox.showinfo("Операция проведена успешно", "Тренер " + name + " был успешно удалён.")
-                else:
-                    messagebox.showerror("Ошибка", "Тренера по этому индексу нет.")
-            except ValueError:
-                messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
+    def deleteTrainerById(id):
+        Trainer.getList().pop(id)
 
 #GetInfo
     @staticmethod
@@ -136,11 +129,16 @@ class Trainer(Employee):
                 return True
         return False
 
+    @staticmethod
+    def isTrainerIdInTheList(ID):
+        for i in Trainer.__List:
+            if (i.getId() == ID):
+                return True
+        return False
+
 #Operator Overloading
     def __eq__(self, other):
-        return ((self.getName()==other.getName() and self.getAge()==other.getAge()
-                and self.getExpirienceAge() == other.getExpirienceAge())
-                and self.getSpecialisation() == other.getSpecialisation())
+        return self.getId()==other.getId()
 
     def __hash__(self):
-        return hash((self.getName(), self.getAge(), self.getExpirienceAge(), self.getSpecialisation()))
+        return hash((self.getName(), self.getAge(), self.getExpirience(), self.getSpecialisation()))

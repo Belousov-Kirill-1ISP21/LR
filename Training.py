@@ -16,6 +16,7 @@ class Training:
         self.__customer = customer
         self.__duration = duration
         Training.addTraining(self)
+        ClientTrainerList.addPairDirectly(customer, trainer)
         logging.info('Был создана новая тренировка')
 
 #Getters
@@ -127,19 +128,8 @@ class Training:
         Training.__List.append(training)
 
     @staticmethod
-    def deleteTraining():
-        user_input = simpledialog.askinteger("Удаление тренировки", "Введите индекс:")
-        if user_input is not None:
-            try:
-                index = user_input
-                if not index < 0 and not index > len(Training.getList()):
-                    Training.__List.pop(index)
-                    logging.info('Из списка была удалена тренировка.')
-                    messagebox.showinfo("Операция проведена успешно", "Тренировка " + str(index) + " была успешно удалена.")
-                else:
-                    messagebox.showerror("Ошибка", "Тренировки по этому индексу нет.")
-            except ValueError:
-                messagebox.showerror("Ошибка", "Пожалуйста, введите корректное число.")
+    def deleteTrainingById(id):
+        Training.getList().pop(id)
 
     @staticmethod
     def changeInfo():
@@ -182,9 +172,7 @@ class Training:
 
 #Operator Overloading
     def __eq__(self, other):
-        return ((self.getTrainer()==other.getTrainer() and self.getCustomer()==other.getCustomer()
-                and self.getTime() == other.getTime())
-                and self.getDuration() == other.getDuration())
+        return self.getId()==other.getId()
 
     def __hash__(self):
         return hash((self.getTrainer(), self.getCustomer(), self.getTime(), self.getDuration()))
