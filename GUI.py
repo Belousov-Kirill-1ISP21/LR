@@ -10,18 +10,24 @@ class GUI(QWidget):
     def __init__(self):
         super().__init__()
 
+        #Настройка главного окна
         self.main_layout = QVBoxLayout()
+        self.setLayout(self.main_layout)
+        self.setFixedSize(1222, 777)
 
+        #Видимость основных вкладок
         self.__isClientWidgetVisible = False
         self.__isTrainerWidgetVisible = False
         self.__isTrainingWidgetVisible = False
         self.__isRelationsWidgetVisible = False
 
+        #Основные вкладки
         self.clientWidget = QWidget()
         self.trainerWidget = QWidget()
         self.trainingWidget = QWidget()
         self.relationsWidget = QWidget()
 
+        #Области прокруток основных вкладок
         self.currentClientRow = None
         self.scrollClientlayout = QVBoxLayout()
 
@@ -35,77 +41,69 @@ class GUI(QWidget):
         self.column2 = QVBoxLayout()
         self.column3 = QVBoxLayout()
 
-
-        self.setFixedSize(1222, 777)
-
-
+        #Создание главного окна
         self.сreateMainWindow()
 
+        #Создание основных вкладок
         self.сreateClientWindow()
         self.сreateTrainerWindow()
         self.сreateTrainingWindow()
         self.сreateRelationsWindow()
 
-        self.setLayout(self.main_layout)
 
 
+
+
+    # Создание главного окна
     def сreateMainWindow(self):
-        # Основной вертикальный layout
 
         self.main_layout.setAlignment(Qt.AlignTop)
 
-        # Установка отступов для основного layout
-        self.main_layout.setContentsMargins(10, 10, 10, 10)  # Отступы: левый, верхний, правый, нижний
+        self.main_layout.setContentsMargins(10, 10, 10, 10)
 
         self.main_layout.addSpacing(24)
 
-        # Заголовок по центру
         title_label = QLabel('Программа для администрирования спортзала')
-        title_label.setAlignment(Qt.AlignCenter)  # Выравнивание по центру
+        title_label.setAlignment(Qt.AlignCenter)
         title_label.setStyleSheet("font-size: 16px;")
         self.main_layout.addWidget(title_label)
 
-        # Добавление вертикального отступа между заголовком и кнопками
-        self.main_layout.addSpacing(24)  # Добавляет пространство (10 пикселей) между заголовком и кнопками
+        self.main_layout.addSpacing(24)
 
-        # Горизонтальный layout для кнопок
         button_layout = QHBoxLayout()
 
-        # Создание 4 кнопок (QPushButton) с жирными стрелками
         clientButton = QPushButton("Управление клиентами ↓")
         trainerButton = QPushButton("Управление тренерами ↓")
         trainingButton = QPushButton("Управление тренировками ↓")
         relationsButton = QPushButton("Посмотреть связи ↓")
 
-        # Подключение кнопок к функции отображения/скрытия прямоугольника
         clientButton.clicked.connect(lambda: self.showHideClient())
         trainerButton.clicked.connect(lambda: self.showHideTrainer())
         trainingButton.clicked.connect(lambda: self.showHideTraining())
         relationsButton.clicked.connect(lambda: self.showHideRelations())
 
         for button in [clientButton, trainerButton, trainingButton, relationsButton]:
-            button.setStyleSheet("font-size: 16px; padding: 10px 20px;")  # Увеличиваем шрифт и внутренние отступы
+            button.setStyleSheet("font-size: 16px; padding: 10px 20px;")
 
         button_layout.addWidget(clientButton)
         button_layout.addWidget(trainerButton)
         button_layout.addWidget(trainingButton)
         button_layout.addWidget(relationsButton)
 
-        # Добавление горизонтального layout с кнопками в основной layout
         self.main_layout.addLayout(button_layout)
 
         self.main_layout.addSpacing(24)
 
+#Создание основных вкладок
     def сreateClientWindow(self):
         self.clientWidget = QWidget()
 
         clientLayout = QVBoxLayout()
 
         rectangle_frame = QWidget()
-        rectangle_frame.setStyleSheet("border: 2px solid black;")  # Стиль прямоугольника
-        rectangle_frame.setFixedSize(1192, 444)  # Фиксированный размер
+        rectangle_frame.setStyleSheet("border: 2px solid black;")
+        rectangle_frame.setFixedSize(1192, 444)
 
-        # Создание layout для прямоугольника и добавление метки
         rectangle_layout = QVBoxLayout()
 
         rectangle_label = QLabel("Клиенты")
@@ -115,10 +113,9 @@ class GUI(QWidget):
 
         scroll_area = QScrollArea()
         scroll_area.setStyleSheet("border: none;")
-        scroll_area.setWidgetResizable(True)  # Виджет будет масштабироваться
+        scroll_area.setWidgetResizable(True)
         scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
-        # Создаем контейнер (QFrame), который будет прокручиваться
         scroll_content = QFrame()
         self.scrollClientlayout = QVBoxLayout(scroll_content)
 
@@ -132,10 +129,8 @@ class GUI(QWidget):
         self.renderClientCards()
         self.scrollClientlayout.addSpacing(44)
 
-        # Установка layout в прямоугольник
         rectangle_frame.setLayout(rectangle_layout)
 
-        # Добавление прямоугольника в основной layout
         clientLayout.addWidget(rectangle_frame)
 
         clientLayout.addSpacing(44)
@@ -170,10 +165,9 @@ class GUI(QWidget):
 
         rectangle_frame = QFrame()
         rectangle_frame.setStyleSheet(
-            "border: 2px solid black;")  # Стиль прямоугольника
-        rectangle_frame.setFixedSize(1192, 444)  # Фиксированный размер
+            "border: 2px solid black;")
+        rectangle_frame.setFixedSize(1192, 444)
 
-        # Создание layout для прямоугольника и добавление метки
         rectangle_layout = QVBoxLayout()
 
         rectangle_label = QLabel("Тренера")
@@ -183,10 +177,9 @@ class GUI(QWidget):
 
         scroll_area = QScrollArea()
         scroll_area.setStyleSheet("border: none;")
-        scroll_area.setWidgetResizable(True)  # Виджет будет масштабироваться
+        scroll_area.setWidgetResizable(True)
         scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
-        # Создаем контейнер (QFrame), который будет прокручиваться
         scroll_content = QFrame()
         self.scrollTrainerlayout = QVBoxLayout(scroll_content)
 
@@ -200,10 +193,8 @@ class GUI(QWidget):
         self.renderTrainerCards()
         self.scrollTrainerlayout.addSpacing(44)
 
-        # Установка layout в прямоугольник
         rectangle_frame.setLayout(rectangle_layout)
 
-        # Добавление прямоугольника в основной layout
         trainerLayout.addWidget(rectangle_frame)
 
         trainerLayout.addSpacing(44)
@@ -231,6 +222,7 @@ class GUI(QWidget):
         self.trainerWidget.hide()
 
         self.main_layout.addWidget(self.trainerWidget)
+
     def сreateTrainingWindow(self):
         self.trainingWidget = QWidget()
 
@@ -238,10 +230,9 @@ class GUI(QWidget):
 
         rectangle_frame = QFrame()
         rectangle_frame.setStyleSheet(
-            "border: 2px solid black;")  # Стиль прямоугольника
-        rectangle_frame.setFixedSize(1192, 444)  # Фиксированный размер
+            "border: 2px solid black;")
+        rectangle_frame.setFixedSize(1192, 444)
 
-        # Создание layout для прямоугольника и добавление метки
         rectangle_layout = QVBoxLayout()
 
         rectangle_label = QLabel("Тренировки")
@@ -251,10 +242,9 @@ class GUI(QWidget):
 
         scroll_area = QScrollArea()
         scroll_area.setStyleSheet("border: none;")
-        scroll_area.setWidgetResizable(True)  # Виджет будет масштабироваться
+        scroll_area.setWidgetResizable(True)
         scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
-        # Создаем контейнер (QFrame), который будет прокручиваться
         scroll_content = QFrame()
         self.scrollTraininglayout = QVBoxLayout(scroll_content)
 
@@ -268,10 +258,8 @@ class GUI(QWidget):
         self.renderTrainingCards()
         self.scrollTraininglayout.addSpacing(44)
 
-        # Установка layout в прямоугольник
         rectangle_frame.setLayout(rectangle_layout)
 
-        # Добавление прямоугольника в основной layout
         trainingLayout.addWidget(rectangle_frame)
 
         trainingLayout.addSpacing(44)
@@ -299,25 +287,24 @@ class GUI(QWidget):
         self.trainingWidget.hide()
 
         self.main_layout.addWidget(self.trainingWidget)
+
     def сreateRelationsWindow(self):
         self.relationsWidget = QWidget()
 
         relationsLayout = QVBoxLayout()
 
         rectangle_frame = QFrame()
-        rectangle_frame.setStyleSheet("border: 2px solid black;")  # Стиль прямоугольника
-        rectangle_frame.setFixedSize(1192, 444)  # Фиксированный размер
+        rectangle_frame.setStyleSheet("border: 2px solid black;")
+        rectangle_frame.setFixedSize(1192, 444)
 
-        # Создание layout для прямоугольника и добавление метки
         rectangle_layout = QVBoxLayout()
 
         header_widget = QWidget()
         header_widget.setStyleSheet("border: none;")
         header_layout = QHBoxLayout(header_widget)
-        header_layout.setContentsMargins(10, 22, 10, 10)  # Отступы: слева, сверху, справа, снизу
-        header_layout.setSpacing(20)  # Расстояние между столбцами
+        header_layout.setContentsMargins(10, 22, 10, 10)
+        header_layout.setSpacing(20)
 
-        # 2. Создаем и настраиваем заголовки
         titles = ["Клиенты", "Тренировки", "Тренера"]
         for title in titles:
             header_label = QLabel(title)
@@ -327,22 +314,19 @@ class GUI(QWidget):
 
         scroll_area = QScrollArea()
         scroll_area.setStyleSheet("border: none;")
-        scroll_area.setWidgetResizable(True)  # Виджет будет масштабироваться
+        scroll_area.setWidgetResizable(True)
         scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 
-        # Создаем контейнер (QFrame), который будет прокручиваться
         scroll_content = QFrame()
-        scroll_layout = QHBoxLayout(scroll_content)  # Основной горизонтальный layout
+        scroll_layout = QHBoxLayout(scroll_content)
 
-        # Создаем 3 вертикальных столбца
         self.column1 = QVBoxLayout()
         self.column2 = QVBoxLayout()
         self.column3 = QVBoxLayout()
 
-        # Настраиваем отступы и расстояние между столбцами
         for column in [self.column1, self.column2, self.column3]:
-            column.setSpacing(44)  # Расстояние между карточками в столбце
+            column.setSpacing(44)
             column.setContentsMargins(5, 5, 44, 5)
             scroll_layout.addLayout(column)
 
@@ -354,10 +338,8 @@ class GUI(QWidget):
         self.renderRelationsCards()
         scroll_layout.addSpacing(44)
 
-        # Установка layout в прямоугольник
         rectangle_frame.setLayout(rectangle_layout)
 
-        # Добавление прямоугольника в основной layout
         relationsLayout.addWidget(rectangle_frame)
 
         relationsLayout.addSpacing(44)
@@ -385,7 +367,7 @@ class GUI(QWidget):
 
         self.main_layout.addWidget(self.relationsWidget)
 
-
+#Показ и скрывание вкладок
     def showHideClient(self):
         if (self.__isClientWidgetVisible == True):
             self.clientWidget.hide()
@@ -444,16 +426,16 @@ class GUI(QWidget):
 
         self.__isRelationsWidgetVisible = not self.__isRelationsWidgetVisible
 
+
+#Создание и добавления карточек объектов
     def createClientCard(self, customer):
         clientCardWidget = QWidget()
         clientCardWidget.clientId = customer.getId()
         clientCardWidget.setStyleSheet("border: 2px solid black;")
         clientCardWidget.setFixedSize(333, 333)
 
-        # Создаем вертикальный layout
         layout = QVBoxLayout()
 
-        # Создаем метки с информацией
         checkBox = QCheckBox()
         checkBox.setStyleSheet("""
             QCheckBox {
@@ -465,7 +447,6 @@ class GUI(QWidget):
             }
         """)
 
-        # Присваиваем чекбокс атрибуту виджета
         clientCardWidget.checkbox = checkBox
 
         id_edit, id_input = self.create_labeled_input("id: ", str(customer.getId()))
@@ -478,30 +459,25 @@ class GUI(QWidget):
         clientCardWidget.age_input = age_input
         clientCardWidget.visit_input = visit_input
 
-        # Добавляем метки в layout
         layout.addWidget(checkBox)
         layout.addWidget(id_edit)
         layout.addWidget(name_edit)
         layout.addWidget(age_edit)
         layout.addWidget(visit_edit)
 
-        # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
         layout.setSpacing(5)
 
-        # Устанавливаем layout для виджета
         clientCardWidget.setLayout(layout)
 
         return clientCardWidget
 
     def add_client_card(self, card):
-        # Если нет текущей строки или в ней уже 3 карточки → создаем новую строку
         if self.currentClientRow is None or self.currentClientRow.count() >= 3:
             self.currentClientRow = QHBoxLayout()
             self.scrollClientlayout.addLayout(self.currentClientRow)
-            self.scrollClientlayout.addSpacing(44)  # Отступ между строками
+            self.scrollClientlayout.addSpacing(44)
 
-        # Добавляем карточку в текущую строку
         self.currentClientRow.addWidget(card)
 
 
@@ -512,10 +488,8 @@ class GUI(QWidget):
         trainerCardWidget.setStyleSheet("border: 2px solid black;")
         trainerCardWidget.setFixedSize(333, 333)
 
-        # Создаем вертикальный layout
         layout = QVBoxLayout()
 
-        # Создаем метки с информацией
         checkBox = QCheckBox()
         checkBox.setStyleSheet("""
             QCheckBox {
@@ -540,7 +514,6 @@ class GUI(QWidget):
         trainerCardWidget.specialization_input = specialization_input
         trainerCardWidget.experience_input = experience_input
 
-        # Добавляем метки в layout
         layout.addWidget(checkBox)
         layout.addWidget(id_edit)
         layout.addWidget(name_edit)
@@ -548,23 +521,19 @@ class GUI(QWidget):
         layout.addWidget(specialization_edit)
         layout.addWidget(experience_edit)
 
-        # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
         layout.setSpacing(5)
 
-        # Устанавливаем layout для виджета
         trainerCardWidget.setLayout(layout)
 
         return trainerCardWidget
 
     def add_trainer_card(self, card):
-        # Если нет текущей строки или в ней уже 3 карточки → создаем новую строку
         if self.currentTrainerRow is None or self.currentTrainerRow.count() >= 3:
             self.currentTrainerRow = QHBoxLayout()
             self.scrollTrainerlayout.addLayout(self.currentTrainerRow)
-            self.scrollTrainerlayout.addSpacing(44)  # Отступ между строками
+            self.scrollTrainerlayout.addSpacing(44)
 
-        # Добавляем карточку в текущую строку
         self.currentTrainerRow.addWidget(card)
 
 
@@ -575,10 +544,8 @@ class GUI(QWidget):
         trainingCardWidget.setStyleSheet("border: 2px solid black;")
         trainingCardWidget.setFixedSize(333, 333)
 
-        # Создаем вертикальный layout
         layout = QVBoxLayout()
 
-        # Создаем метки с информацией
         checkBox = QCheckBox()
         checkBox.setStyleSheet("""
             QCheckBox {
@@ -603,7 +570,6 @@ class GUI(QWidget):
         trainingCardWidget.time_input = time_input
         trainingCardWidget.duration_input = duration_input
 
-        # Добавляем метки в layout
         layout.addWidget(checkBox)
         layout.addWidget(id_edit)
         layout.addWidget(client_edit)
@@ -611,27 +577,22 @@ class GUI(QWidget):
         layout.addWidget(time_edit)
         layout.addWidget(duration_edit)
 
-        # Устанавливаем отступы и spacing
         layout.setContentsMargins(10, 10, 10, 10)
         layout.setSpacing(5)
 
-        # Устанавливаем layout для виджета
         trainingCardWidget.setLayout(layout)
 
         return trainingCardWidget
 
     def add_training_card(self, card):
-        # Если нет текущей строки или в ней уже 3 карточки → создаем новую строку
         if self.currentTrainingRow is None or self.currentTrainingRow.count() >= 3:
             self.currentTrainingRow = QHBoxLayout()
             self.scrollTraininglayout.addLayout(self.currentTrainingRow)
-            self.scrollTraininglayout.addSpacing(44)  # Отступ между строками
+            self.scrollTraininglayout.addSpacing(44)
 
-        # Добавляем карточку в текущую строку
         self.currentTrainingRow.addWidget(card)
 
     def add_relations_card(self, card, column_number):
-        """Добавляет карточку в указанный столбец (1, 2 или 3)"""
         if column_number == 1:
             self.column1.addWidget(card)
         elif column_number == 2:
@@ -639,20 +600,18 @@ class GUI(QWidget):
         elif column_number == 3:
             self.column3.addWidget(card)
 
+#Создание поля для ввода с названием слева
     def create_labeled_input(self, label_text, default_value):
-        """Создает поле ввода с нестираемой меткой сбоку"""
         container = QWidget()
         container.setFixedSize(313, 56)
         container.setStyleSheet("margin: 5px;")
         layout = QHBoxLayout(container)
 
-        # Фиксированная метка
         label = QLabel(label_text)
         label.setStyleSheet("font-size: 14px; margin: 5px; margin-right: 0px; border: none;")
         label.setAlignment(Qt.AlignLeft)
         label.setAlignment(Qt.AlignVCenter)
 
-        # Поле для ввода
         line_edit = QLineEdit(default_value)
         line_edit.setStyleSheet("height: 28px;")
 
@@ -661,33 +620,33 @@ class GUI(QWidget):
 
         return container, line_edit
 
+#Очистка карточек с вкладок
     def clear_layout(self, layout):
-        """Полностью очищает layout клиентов"""
-        # 1. Удаляем все строки и карточки
+
         while layout.count():
             item = layout.takeAt(0)
 
-            if item.layout():  # Это строка (QHBoxLayout)
+            if item.layout():
                 while item.layout().count():
                     widget = item.layout().takeAt(0).widget()
                     if widget:
                         widget.deleteLater()
                 item.layout().deleteLater()
 
-        # 2. Сбрасываем состояние
         self.currentClientRow = None
         self.currentTrainerRow = None
         self.currentTrainingRow = None
         layout.update()
 
+# Очистка карточек со вкладки связей
     def clearRelationslayout(self, layout):
-        """Очищает layout от всех виджетов"""
         while layout.count():
             item = layout.takeAt(0)
             widget = item.widget()
             if widget:
                 widget.deleteLater()
 
+#Создать карточки
     def renderClientCards(self):
         self.clear_layout(self.scrollClientlayout)
         for i in Customer.getList():
@@ -713,42 +672,36 @@ class GUI(QWidget):
         trainings = Training.getList()
         trainers = Trainer.getList()
 
-        # Находим максимальное количество карточек
         max_count = max(len(clients), len(trainings), len(trainers))
 
-        # Добавляем карточки с выравниванием
         for i in range(max_count):
-            # Клиенты (столбец 1)
             if i < len(clients):
                 self.column1.addWidget(self.createClientCard(clients[i]))
             else:
                 self.column1.addWidget(self.create_empty_card())
 
-            # Тренировки (столбец 2)
             if i < len(trainings):
                 self.column2.addWidget(self.createTrainingCard(trainings[i]))
             else:
                 self.column2.addWidget(self.create_empty_card())
 
-            # Тренеры (столбец 3)
             if i < len(trainers):
                 self.column3.addWidget(self.createTrainerCard(trainers[i]))
             else:
                 self.column3.addWidget(self.create_empty_card())
-
-    def create_empty_card(self):
-        """Создает пустую невидимую карточку для выравнивания"""
-        card = QWidget()
-        card.setFixedHeight(333)  # Такая же высота, как у обычных карточек
-        return card
-
-
     def renderAllCards(self):
         self.renderClientCards()
         self.renderTrainerCards()
         self.renderTrainingCards()
         self.renderRelationsCards()
 
+#Создание пустой карточки для более красивого отображения в последней вкладке
+    def create_empty_card(self):
+        card = QWidget()
+        card.setFixedHeight(333)
+        return card
+
+#Добавить новую карточку объекта
     def addNewClient(self):
         Customer(Customer.getList()[-1].getId() + 1, "", 0, 0)
         self.renderAllCards()
@@ -762,8 +715,8 @@ class GUI(QWidget):
                  Trainer.getTrainerById(Trainer.getList()[-1].getId()), 0)
         self.renderAllCards()
 
+# Удалить карточку объекта
     def deleteClient(self):
-        """Удаляет клиентов с отмеченными чекбоксами"""
         clients_to_delete = []
 
         for i in range(self.scrollClientlayout.count()):
@@ -786,7 +739,6 @@ class GUI(QWidget):
             self.renderAllCards()
 
     def deleteTrainer(self):
-        """Удаляет тренеров с отмеченными чекбоксами"""
         trainers_to_delete = []
 
         for i in range(self.scrollTrainerlayout.count()):
@@ -809,7 +761,6 @@ class GUI(QWidget):
             self.renderAllCards()
 
     def deleteTraining(self):
-        """Удаляет тренировки с отмеченными чекбоксами"""
         trainings_to_delete = []
 
         for i in range(self.scrollTraininglayout.count()):
@@ -831,6 +782,7 @@ class GUI(QWidget):
                     print(f"Ошибка удаления тренировки {training_id}: {str(e)}")
             self.renderAllCards()
 
+# Создать только связанные карточки
     def renderCardsInRelationByClient(self, clientId):
         self.clearRelationslayout(self.column1)
         self.clearRelationslayout(self.column2)
@@ -844,30 +796,23 @@ class GUI(QWidget):
                 trainings.append(i)
                 trainers.append(i.getTrainer())
 
-        # Находим максимальное количество карточек
         max_count = max(1, len(trainings), len(trainers))
 
-        # Добавляем карточки с выравниванием
         for i in range(max_count):
-            # Клиенты (столбец 1)
             if i < 1:
                 self.column1.addWidget(self.createClientCard(client))
             else:
                 self.column1.addWidget(self.create_empty_card())
 
-            # Тренировки (столбец 2)
             if i < len(trainings):
                 self.column2.addWidget(self.createTrainingCard(trainings[i]))
             else:
                 self.column2.addWidget(self.create_empty_card())
 
-            # Тренеры (столбец 3)
             if i < len(trainers):
                 self.column3.addWidget(self.createTrainerCard(trainers[i]))
             else:
                 self.column3.addWidget(self.create_empty_card())
-
-
     def renderCardsInRelationByTrainer(self, trainerId):
         self.clearRelationslayout(self.column1)
         self.clearRelationslayout(self.column2)
@@ -882,24 +827,21 @@ class GUI(QWidget):
                 trainings.append(i)
                 clients.append(i.getCustomer())
 
-
-        # Находим максимальное количество карточек
         max_count = max(len(clients), len(trainings), 2)
-        # Добавляем карточки с выравниванием
+
         for i in range(max_count):
-            # Клиенты (столбец 1)
+
             if i < len(clients):
                 self.column1.addWidget(self.createClientCard(clients[i]))
             else:
                 self.column1.addWidget(self.create_empty_card())
 
-            # Тренировки (столбец 2)
+
             if i < len(trainings):
                 self.column2.addWidget(self.createTrainingCard(trainings[i]))
             else:
                 self.column2.addWidget(self.create_empty_card())
 
-            # Тренеры (столбец 3)
             if i < 1:
                 self.column3.addWidget(self.createTrainerCard(trainer))
             else:
@@ -914,30 +856,25 @@ class GUI(QWidget):
         client = training.getCustomer()
         trainer = training.getTrainer()
 
-        # Находим максимальное количество карточек
         max_count = 1
 
-        # Добавляем карточки с выравниванием
         for i in range(max_count):
-            # Клиенты (столбец 1)
             if i < 1:
                 self.column1.addWidget(self.createClientCard(client))
             else:
                 self.column1.addWidget(self.create_empty_card())
 
-            # Тренировки (столбец 2)
             if i < 1:
                 self.column2.addWidget(self.createTrainingCard(training))
             else:
                 self.column2.addWidget(self.create_empty_card())
 
-            # Тренеры (столбец 3)
             if i < 1:
                 self.column3.addWidget(self.createTrainerCard(trainer))
             else:
                 self.column3.addWidget(self.create_empty_card())
 
-
+# Показать связанные карточки
     def showClientRelations(self):
         selected_cards = []
         for i in range(self.column1.count()):
@@ -946,10 +883,10 @@ class GUI(QWidget):
                 card = item.widget()
                 if hasattr(card, 'checkbox') and card.checkbox.isChecked():
                     selected_cards.append(card)
-            # Обработка результатов
+
         if len(selected_cards) == 1:
             self.renderCardsInRelationByClient(selected_cards[0].clientId)
-            return selected_cards[0]  # Возвращаем выбранную карточку
+            return selected_cards[0]
         elif len(selected_cards) > 1:
             self.show_warning_message()
             return None
@@ -965,10 +902,10 @@ class GUI(QWidget):
                 card = item.widget()
                 if hasattr(card, 'checkbox') and card.checkbox.isChecked():
                     selected_cards.append(card)
-            # Обработка результатов
+
         if len(selected_cards) == 1:
             self.renderCardsInRelationByTrainer(selected_cards[0].trainerId)
-            return selected_cards[0]  # Возвращаем выбранную карточку
+            return selected_cards[0]
         elif len(selected_cards) > 1:
             self.show_warning_message()
             return None
@@ -984,24 +921,24 @@ class GUI(QWidget):
                 card = item.widget()
                 if hasattr(card, 'checkbox') and card.checkbox.isChecked():
                     selected_cards.append(card)
-            # Обработка результатов
+
         if len(selected_cards) == 1:
             self.renderCardsInRelationByTraining(selected_cards[0].trainingId)
-            return selected_cards[0]  # Возвращаем выбранную карточку
+            return selected_cards[0]
         elif len(selected_cards) > 1:
             self.show_warning_message()
             return None
         else:
             return None
 
-
+# Вывод ошибки, если карточек для связей было выбрано больше 1
     def show_warning_message(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
         msg.setText("Пожалуйста, выберите только одну карточку")
         msg.exec_()
 
-
+# Изменениеи информмации об объекте
     def changeClient(self):
         for i in range(self.scrollClientlayout.count()):
             item = self.scrollClientlayout.itemAt(i)

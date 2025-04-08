@@ -99,29 +99,6 @@ class Training:
         messagebox.showinfo("Тренировки", result)
 
 #ChangeList
-    @staticmethod
-    def createTraining():
-        if len(Training.__List)!=0:
-            id = Training.__List[-1].getId() + 1
-        else:
-            id=0
-
-        clientName = str(simpledialog.askstring("Создание тренировки", "Введите имя клиента:")).replace(' ', '')
-        trainerName = str(simpledialog.askstring("Создание тренировки", "Введите имя тренера:")).replace(' ', '')
-
-        customer = Customer.getCustomerByName(clientName)
-        trainer = Trainer.getTrainerByName(trainerName)
-
-        time = str(simpledialog.askstring("Создание тренировки", "Введите время начала тренировки:")).replace(' ', '')
-        duration = simpledialog.askinteger("Создание тренировки", "Введите продолжительность тренировки:")
-        if customer is not None and trainer is not None and time is not None and duration is not None:
-            try:
-                Training(id, time, trainer, customer, duration)
-                ClientTrainerList.addPairDirectly(customer, trainer)
-                messagebox.showinfo("Операция проведена успешно", "Тренировка " + str(id) + " была успешно создана.")
-            except ValueError:
-                messagebox.showerror("Ошибка", "Пожалуйста, введите корректные данные.")
-
 
     @staticmethod
     def addTraining(training):
@@ -131,36 +108,6 @@ class Training:
     def deleteTrainingById(id):
         Training.getList().pop(id)
 
-    @staticmethod
-    def changeInfo():
-        id = simpledialog.askinteger("Изменение информации о тренировке", "Введите ID тренировки:")
-        try:
-            if id is not None:
-                training = Training.getTrainingById(id)
-                if Training.isTrainingIdInTheList(id):
-                    clientName = str(simpledialog.askstring("Создание тренировки", "Введите имя клиента:")).replace(' ','')
-                    trainerName = str(simpledialog.askstring("Создание тренировки", "Введите имя тренера:")).replace(' ', '')
-
-                    customer = Customer.getCustomerByName(clientName)
-                    trainer = Trainer.getTrainerByName(trainerName)
-
-                    time = str(simpledialog.askstring("Создание тренировки", "Введите время начала тренировки:")).replace(' ', '')
-                    duration = simpledialog.askinteger("Создание тренировки", "Введите продолжительность тренировки:")
-
-                    if customer is not None and trainer is not None and time is not None and duration is not None:
-                        training.setTrainer(trainer)
-                        training.setCustomer(customer)
-                        ClientTrainerList.addPairDirectly(customer, trainer)
-                        training.setDuration(duration)
-                        training.setTime(time)
-                        logging.info('Информация о тренировке была изменена.')
-                        messagebox.showinfo("Операция проведена успешно", "Инфомрация о тренировке " + str(id) + " была успешно изменена.")
-                    else:
-                        messagebox.showerror("Ошибка", "Пожалуйста, введите корректную информацию о тренировке")
-                else:
-                    messagebox.showerror("Ошибка", "Нет тренировки с таким ID.")
-        except:
-            messagebox.showerror("Ошибка", "Пожалуйста, введите корректное ID тренировки.")
 
 #GetInfo
     @staticmethod

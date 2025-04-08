@@ -81,40 +81,6 @@ class Customer(Person):
     def deleteCustomerByID(id):
         Customer.getList().pop(id)
 
-    @staticmethod
-    def createCustomer():
-        customerName = str(simpledialog.askstring("Создание клиента", "Введите имя клиента:")).replace(' ','')
-        customerAge = simpledialog.askinteger("Создание клиента", "Введите возраст клиента:")
-        if customerName is not None and customerAge is not None:
-            try:
-                Customer(customerName, customerAge, 0)
-                messagebox.showinfo("Операция проведена успешно", "Клиент " + customerName + " был успешно создан.")
-            except ValueError: messagebox.showerror("Ошибка", "Пожалуйста, введите корректные данные.")
-
-    @staticmethod
-    def changeInfo():
-        clientName = str(simpledialog.askstring("Изменение информации о клиенте", "Введите имя клиента:")).replace(' ', '')
-        try:
-            if clientName is not None:
-                client = Customer.getCustomerByName(clientName)
-                if Customer.isCustomerNameInTheList(clientName):
-                    customerAge = simpledialog.askinteger("Изменение информации о клиенте", "Введите возраст клиента:")
-                    if customerAge is not None:
-                        customerVisitTime = simpledialog.askinteger("Создание клиента", "Введите время посещения в часах:")
-                        if customerVisitTime is not None:
-                            client.setAge(customerAge)
-                            client.setVisitTime(customerVisitTime)
-                            logging.info('Информация о клиенте была изменена.')
-                            messagebox.showinfo("Операция проведена успешно", "Инфомрация о клиенте " + clientName + " была успешно изменена.")
-                        else:
-                            messagebox.showerror("Ошибка", "Пожалуйста, введите корректное время посещения клиента в часах")
-                    else:
-                        messagebox.showerror("Ошибка", "Пожалуйста, введите корректный возраст клиента")
-                else:
-                    messagebox.showerror("Ошибка", "Нет клиента с таким именем.")
-        except:
-            messagebox.showerror("Ошибка", "Пожалуйста, введите корректное имя клиента.")
-
 #GetInfo
     @staticmethod
     def isCustomerNameInTheList(customerName):

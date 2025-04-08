@@ -76,46 +76,10 @@ class Trainer(Employee):
         messagebox.showinfo("Тренера", result)
 
 #ChangeList
-    @staticmethod
-    def createTrainer():
-        trainerName = str(simpledialog.askstring("Создание тренера", "Введите имя тренера:")).replace(' ', '')
-        trainerAge = simpledialog.askinteger("Создание тренера", "Введите возраст тренера:")
-        expirience = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
-        specialisation = str(simpledialog.askstring("Создание тренера", "Введите специализацию тренера:")).replace(' ', '')
-        if trainerName is not None and trainerAge is not None and expirience is not None and specialisation is not None:
-            try:
-                Trainer(trainerName, trainerAge, expirience,specialisation)
-                messagebox.showinfo("Операция проведена успешно", "Тренер " + trainerName + " был успешно создан.")
-            except ValueError:
-                messagebox.showerror("Ошибка", "Пожалуйста, введите корректные данные.")
 
     @staticmethod
     def addTrainer(trainer):
         Trainer.__List.append(trainer)
-
-    @staticmethod
-    def changeInfo():
-        trainerName = str(simpledialog.askstring("Изменение информации о тренере", "Введите имя тренера:")).replace(
-            ' ', '')
-        try:
-            if trainerName is not None:
-                trainer = Trainer.getTrainerByName(trainerName)
-                if Trainer.isTrainerNameInTheList(trainerName):
-                    trainerAge = simpledialog.askinteger("Изменение информации о тренере","Введите возраст тренера:")
-                    expirience = simpledialog.askinteger("Создание тренера", "Введите опыт работы тренера:")
-                    specialisation = str(simpledialog.askstring("Создание тренера", "Введите специализацию тренера:")).replace(' ', '')
-                    if trainerAge is not None and expirience is not None and specialisation is not None:
-                        trainer.setAge(trainerAge)
-                        trainer.setExpirienceAge(expirience)
-                        trainer.setSpecialisation(specialisation)
-                        logging.info('Информация о тренере была изменена.')
-                        messagebox.showinfo("Операция проведена успешно","Инфомрация о тренере " + trainerName + " была успешно изменена.")
-                    else:
-                        messagebox.showerror("Ошибка", "Пожалуйста, введите корректную информацию о тренере")
-                else:
-                    messagebox.showerror("Ошибка", "Нет тренера с таким именем.")
-        except:
-            messagebox.showerror("Ошибка", "Пожалуйста, введите корректное имя тренера.")
 
     @staticmethod
     def deleteTrainerById(id):
