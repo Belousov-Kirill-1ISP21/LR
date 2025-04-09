@@ -83,7 +83,11 @@ class Trainer(Employee):
 
     @staticmethod
     def deleteTrainerById(id):
-        Trainer.getList().pop(id)
+        trainers = Trainer.getList()
+        for trainer in trainers:
+            if trainer.getId() == id:
+                trainers.remove(trainer)
+                break
 
 #GetInfo
     @staticmethod

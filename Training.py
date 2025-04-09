@@ -106,7 +106,11 @@ class Training:
 
     @staticmethod
     def deleteTrainingById(id):
-        Training.getList().pop(id)
+        trainings = Training.getList()
+        for training in trainings:
+            if training.getId() == id:
+                trainings.remove(training)
+                break
 
 
 #GetInfo

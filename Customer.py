@@ -79,7 +79,11 @@ class Customer(Person):
 
     @staticmethod
     def deleteCustomerByID(id):
-        Customer.getList().pop(id)
+        customers = Customer.getList()
+        for customer in customers:
+            if customer.getId() == id:
+                customers.remove(customer)
+                break
 
 #GetInfo
     @staticmethod
